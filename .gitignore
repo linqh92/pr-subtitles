@@ -1,0 +1,42 @@
+# Local Python environment and recognition cache
+.venv/
+venv/
+.cache/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+build/
+dist/
+
+# Private narration inputs and generated outputs
+input/
+inputs/
+output/
+*.mp3
+*.wav
+*.m4a
+*.flac
+*.aac
+*.ogg
+*.mp4
+*.mov
+*.srt
+*.review.json
+
+# Local credentials and settings
+.env
+.env.*
+!.env.example
+*.token
+.idea/
+.vscode/
+
+# OS and editor temporary files
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.tmp
+*.temp
+*.swp
+~$*

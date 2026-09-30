@@ -1,0 +1,3 @@
+# Keep source files consistent across Windows and macOS.
+* text=auto eol=lf
+*.cmd text eol=crlf

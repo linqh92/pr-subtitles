@@ -1,0 +1,38 @@
+name: Python checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    name: Python 3.12 / ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, macos-latest]
+    env:
+      PYTHONUTF8: '1'
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: requirements.txt
+      - name: Install speech dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Check dependency imports and CPU support
+        run: python -c "import av, faster_whisper, ctranslate2; print(ctranslate2.get_supported_compute_types('cpu'))"
+      - name: Run unit checks
+        run: python -m unittest discover -s tests -v
+      - name: Check Python entry point
+        run: python run.py --help
